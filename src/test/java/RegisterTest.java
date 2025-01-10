@@ -1,13 +1,9 @@
+import PageObject.LoginPage;
 import PageObject.RegisterPage;
 import com.github.javafaker.Faker;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import org.openqa.selenium.WebDriver;
-import java.time.Duration;
-
 
 public class RegisterTest extends Base {
 
@@ -19,22 +15,24 @@ public class RegisterTest extends Base {
     public String passwordIs4Char = faker.letterify("????");
 
     @Test
-    public void checkRegisterWithRightField () {
+    @DisplayName("Проверка регистрации пользователя")
+    public void checkRegisterWithRightField() {
         driver.get(Constants.REGISTER_URL);
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.registerNewUser(name, email, password);
-        String text = registerPage.openPageAfterRegister();
-        Assert.assertEquals("Войти", text);
-  }
+        LoginPage loginPage = new LoginPage(driver);
+        boolean result = loginPage.openLoginPage();
+        Assert.assertTrue(result);
+    }
 
     @Test
+    @DisplayName("Проверка сообщения об ошибки при создании пользователя с паролем из 4 символов")
     public void checkRegisterWithWrongPassword () {
         driver.get(Constants.REGISTER_URL);
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.registerNewUser(name, email, passwordIs4Char);
         String text = registerPage.textErrorForWrongPassword();
         Assert.assertEquals("Некорректный пароль", text);
-
     }
 
 }

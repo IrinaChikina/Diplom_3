@@ -15,7 +15,7 @@ public class Base {
         Start start = new Start();
         start.initDriver();
         driver = start.getDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Step ("Закрытие браузера")
