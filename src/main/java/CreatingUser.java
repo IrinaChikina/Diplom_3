@@ -1,9 +1,7 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_ACCEPTED;
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -31,8 +29,6 @@ public class CreatingUser {
         return name;
     }
 
-
-
     @Step("Запрос на создание нового пользователя")
     public Response creatingUser(CreatingUser user) {
         return given().log().all()
@@ -40,6 +36,7 @@ public class CreatingUser {
                 .body(user)
                 .when().post(Constants.API_CREATING);
     }
+
     @Step("Пользователь успешно создан")
     public String checkCreatedOK(Response response) {
         return response.then().log().all()
@@ -47,7 +44,6 @@ public class CreatingUser {
                 .statusCode(HTTP_OK)
                 .extract().path( "accessToken");
     }
-
 
     @Step("Созданный пользователь удален")
     public void deleteUser(String token) {
