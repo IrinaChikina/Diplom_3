@@ -1,11 +1,9 @@
 package PageObject;
-
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class LoginPage {
@@ -15,7 +13,7 @@ public class LoginPage {
     private By headerEnter = By.xpath(".//h2[contains(text(), 'Вход')]");
     private By emailField = By.xpath(".//input[contains(@class, 'text') and @name='name']");
     private By passwordField = By.xpath(".//input[contains(@class, 'text') and @type='password']");
-    private By enterButton = By.xpath(".//button[contains(@class, 'button_button')]");
+    private By enterButton = By.xpath(".//button[text()='Войти']");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -40,6 +38,13 @@ public class LoginPage {
         new WebDriverWait(driver,Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(enterButton));
         driver.findElement(enterButton).click();
+    }
+
+    @Step("Открытие страницы для входа в аккаунт для зарегистрированного пользователя")
+    public boolean openLoginPage() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(driver.findElement(headerEnter)));
+        return driver.findElement(enterButton).isDisplayed();
     }
 
     @Step("Авторизация пользователя с ранее созданным логином и паролем")
