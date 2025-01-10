@@ -12,7 +12,6 @@ public class ProfilePage {
 
     private WebDriver driver;
 
-    private By personalProfileForm = By.xpath(".//div[contains(@class, 'Account_account')]");
     private By valueFieldEmail = By.xpath(".//input[contains(@name, 'name') and @type='text']");
     private By constructorButtonHeader = By.xpath(".//p[contains(@class, 'AppHeader_header__linkText') and text()='Конструктор'] ");
     private By logoOnHeader = By.xpath(".//div[contains(@class, 'AppHeader_header__logo')]");
