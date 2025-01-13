@@ -1,7 +1,6 @@
 import PageObject.LoginPage;
 import PageObject.ProfilePage;
 import PageObject.SitePage;
-import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
@@ -12,13 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ButtonsHeaderTest extends Base {
+    CreatingUser creatingUser = GeneratorUser.getRandomUser();
 
-    Faker faker = new Faker();
-    private String email = faker.internet().emailAddress();
-    private String password = faker.internet().password(6, 10);
-    private String name = faker.name().username();
-
-    CreatingUser creatingUser = new CreatingUser(email,password,name);
     String token;
 
     @Step("Создание пользователя для Stellar Burger и вход в личный кабинет")
@@ -26,19 +20,19 @@ public class ButtonsHeaderTest extends Base {
     public void setUp() {
         RestAssured.baseURI = Constants.START_URL;
         Response response = creatingUser.creatingUser(creatingUser);
-        token =  creatingUser.checkCreatedOK(response);
+        token = creatingUser.checkCreatedOK(response);
 
         driver.get(Constants.START_URL);
         SitePage sitePage = new SitePage(driver);
         sitePage.clickButtonEnter();
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterPersonalProfile(email, password);
+        loginPage.enterPersonalProfile(creatingUser.getEmail(), creatingUser.getPassword());
         sitePage.jumpPersonalAccount();
     }
 
     @Test
     @DisplayName("Проверка перехода из Личного кабинета к Конструктору в шапке")
-    public void checkEnterFromAccountOnConstructor() {
+    public void enterFromAccountOnConstructorTest() {
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.jumpConstructor();
         SitePage sitePage = new SitePage(driver);
@@ -48,11 +42,11 @@ public class ButtonsHeaderTest extends Base {
 
     @Test
     @DisplayName("Проверка перехода из Личного кабинета на главную страницу через логотип")
-    public void checkEnterFromAccountOnSitePage() {
+    public void enterFromAccountOnSitePageTest() {
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.jumpSitePage();
         SitePage sitePage = new SitePage(driver);
-        boolean result =  sitePage.checkOpenSitePage();
+        boolean result = sitePage.checkOpenSitePage();
         Assert.assertTrue(result);
     }
 

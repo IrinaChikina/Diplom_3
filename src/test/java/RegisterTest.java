@@ -6,20 +6,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class RegisterTest extends Base {
-
-    Faker faker = new Faker();
-
-    public String name = faker.name().firstName();
-    public String email = faker.internet().emailAddress();
-    public String password = faker.letterify("??????");
-    public String passwordIs4Char = faker.letterify("????");
+    CreatingUser creatingUser = GeneratorUser.getRandomUser();
 
     @Test
     @DisplayName("Проверка регистрации пользователя")
-    public void checkRegisterWithRightField() {
+    public void registerWithRightFieldTest() {
         driver.get(Constants.REGISTER_URL);
         RegisterPage registerPage = new RegisterPage(driver);
-        registerPage.registerNewUser(name, email, password);
+        registerPage.registerNewUser(creatingUser.getName(), creatingUser.getEmail(), creatingUser.getPassword());
         LoginPage loginPage = new LoginPage(driver);
         boolean result = loginPage.openLoginPage();
         Assert.assertTrue(result);
@@ -27,12 +21,13 @@ public class RegisterTest extends Base {
 
     @Test
     @DisplayName("Проверка сообщения об ошибки при создании пользователя с паролем из 4 символов")
-    public void checkRegisterWithWrongPassword () {
+    public void checkRegisterWithWrongPassword() {
+        Faker faker = new Faker();
+        String passwordIs4Char = faker.letterify("????");
         driver.get(Constants.REGISTER_URL);
         RegisterPage registerPage = new RegisterPage(driver);
-        registerPage.registerNewUser(name, email, passwordIs4Char);
+        registerPage.registerNewUser(creatingUser.getName(), creatingUser.getEmail(), passwordIs4Char);
         String text = registerPage.textErrorForWrongPassword();
         Assert.assertEquals("Некорректный пароль", text);
     }
-
 }

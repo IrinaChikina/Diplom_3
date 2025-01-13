@@ -7,7 +7,7 @@ public class JumpToSectionsConstructorTest extends Base {
 
     @Test
     @DisplayName("Проверка перехода к разделу 'соусы' в блоке конструктора бургера")
-    public void checkJumpToSauce () {
+    public void jumpToSauceTest() {
         driver.get(Constants.START_URL);
         SitePage sitePage = new SitePage(driver);
         sitePage.clickToSauce();
@@ -17,7 +17,7 @@ public class JumpToSectionsConstructorTest extends Base {
 
     @Test
     @DisplayName("Проверка перехода к разделу 'булки' в блоке конструктора бургера")
-    public void checkJumpToBuns () {
+    public void jumpToBunsTest() {
         driver.get(Constants.START_URL);
         SitePage sitePage = new SitePage(driver);
         sitePage.clickToSauce();
@@ -28,7 +28,7 @@ public class JumpToSectionsConstructorTest extends Base {
 
     @Test
     @DisplayName("Проверка перехода к разделу 'начинки' в блоке конструктора бургера")
-    public void checkJumpToFilling () {
+    public void jumpToFillingTest() {
         driver.get(Constants.START_URL);
         SitePage sitePage = new SitePage(driver);
         sitePage.clickToFilling();

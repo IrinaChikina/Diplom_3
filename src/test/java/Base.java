@@ -9,7 +9,7 @@ public class Base {
 
     public WebDriver driver;
 
-    @Step ("Запуск браузера")
+    @Step("Запуск браузера")
     @Before
     public void initDriver() {
         Start start = new Start();
@@ -18,7 +18,7 @@ public class Base {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @Step ("Закрытие браузера")
+    @Step("Закрытие браузера")
     @After
     public void teardown() {
         driver.quit();
