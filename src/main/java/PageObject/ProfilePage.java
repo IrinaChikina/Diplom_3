@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ProfilePage {
-
     private WebDriver driver;
 
     private By valueFieldEmail = By.xpath(".//input[contains(@name, 'name') and @type='text']");
@@ -20,7 +19,8 @@ public class ProfilePage {
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
     }
-@Step ("Получение логина авторизованного пользователя")
+
+    @Step("Получение логина авторизованного пользователя")
     public String checkValueEmail() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(valueFieldEmail));
@@ -41,13 +41,10 @@ public class ProfilePage {
         driver.findElement(logoOnHeader).click();
     }
 
-
     @Step("Выход из аккаунта")
     public void exitFromProfile() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.elementToBeClickable(exitButton));
         driver.findElement(exitButton).click();
     }
-
 }
-

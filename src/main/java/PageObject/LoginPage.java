@@ -1,9 +1,11 @@
 package PageObject;
+
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public class LoginPage {
@@ -19,23 +21,23 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    private void checkOpenLoginPage (){
+    private void checkOpenLoginPage() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(headerEnter));
     }
 
-    private void inputFieldEmail (String email) {
+    private void inputFieldEmail(String email) {
         driver.findElement(emailField).clear();
         driver.findElement(emailField).sendKeys(email);
     }
 
-    private void inputFieldPassword (String password) {
+    private void inputFieldPassword(String password) {
         driver.findElement(passwordField).clear();
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    private void clickButtonEnter (){
-        new WebDriverWait(driver,Duration.ofSeconds(10))
+    private void clickButtonEnter() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(enterButton));
         driver.findElement(enterButton).click();
     }
@@ -48,7 +50,7 @@ public class LoginPage {
     }
 
     @Step("Авторизация пользователя с ранее созданным логином и паролем")
-    public void enterPersonalProfile (String email,String password){
+    public void enterPersonalProfile(String email, String password) {
         checkOpenLoginPage();
         inputFieldEmail(email);
         inputFieldPassword(password);

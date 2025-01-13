@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class RegisterPage {
-
     private WebDriver driver;
 
     private By nameField = By.xpath(".//label[contains(text(), 'Имя')]/following-sibling::input");
@@ -19,7 +18,7 @@ public class RegisterPage {
         this.driver = driver;
     }
 
-    @Step ("Регистрация пользователя")
+    @Step("Регистрация пользователя")
     public void registerNewUser(String name, String email, String password) {
         driver.findElement(nameField).sendKeys(name);
         driver.findElement(emailField).sendKeys(email);
@@ -27,13 +26,13 @@ public class RegisterPage {
         driver.findElement(registerButton).click();
     }
 
-@Step("Получение текста сообщения об ошибке при заполнении пароля 4 символа")
-    public String textErrorForWrongPassword (){
+    @Step("Получение текста сообщения об ошибке при заполнении пароля 4 символа")
+    public String textErrorForWrongPassword() {
         return driver.findElement(errorPassword).getText();
     }
 
-    @Step ("Переход на страницу входа в личный кабинет со станицы регистрации")
-    public void clickEnterButton () {
+    @Step("Переход на страницу входа в личный кабинет со станицы регистрации")
+    public void clickEnterButton() {
         driver.findElement(enterButton).click();
     }
 }

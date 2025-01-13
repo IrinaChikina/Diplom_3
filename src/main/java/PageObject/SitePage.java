@@ -5,11 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 
 public class SitePage {
-
-   private final WebDriver driver;
+    private final WebDriver driver;
 
     private By enterButten = By.xpath(".//button[contains(@class, 'button_button')]");
     private By personalAccountButtonHeader = By.xpath(".//p[contains(@class, 'AppHeader_header__linkText') and text()='Личный Кабинет']");
@@ -43,14 +43,14 @@ public class SitePage {
     }
 
     @Step("Проверка заголовка страницы блока 'Конструктор'")
-    public String checkPageBuildBurger () {
+    public String checkPageBuildBurger() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(buildBurger));
         return driver.findElement(buildBurger).getText();
     }
 
     @Step("Проверка открытия главной страницы сайта")
-    public boolean checkOpenSitePage () {
+    public boolean checkOpenSitePage() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(basketElement));
         return driver.findElement(basketElement).isDisplayed();
@@ -85,6 +85,6 @@ public class SitePage {
 
     @Step("Получение названия активной вкладки")
     public String checkCurrentTab() {
-       return driver.findElement(currentTab).getText();
+        return driver.findElement(currentTab).getText();
     }
 }
