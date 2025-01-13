@@ -2,32 +2,21 @@
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_ACCEPTED;
 import static java.net.HttpURLConnection.HTTP_OK;
 
+@Data
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class CreatingUser {
     private String email;
     private String password;
     private String name;
-
-    public CreatingUser(String email, String password, String name) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     @Step("Запрос на создание нового пользователя")
     public Response creatingUser(CreatingUser user) {
@@ -42,7 +31,7 @@ public class CreatingUser {
         return response.then().log().all()
                 .assertThat()
                 .statusCode(HTTP_OK)
-                .extract().path( "accessToken");
+                .extract().path("accessToken");
     }
 
     @Step("Созданный пользователь удален")
