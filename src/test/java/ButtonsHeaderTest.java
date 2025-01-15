@@ -11,9 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ButtonsHeaderTest extends Base {
-    CreatingUser creatingUser = GeneratorUser.getRandomUser();
-
     String token;
+
+    CreatingUser creatingUser = GeneratorUser.getRandomUser();
 
     @Step("Создание пользователя для Stellar Burger и вход в личный кабинет")
     @Before
@@ -21,8 +21,8 @@ public class ButtonsHeaderTest extends Base {
         RestAssured.baseURI = Constants.START_URL;
         Response response = creatingUser.creatingUser(creatingUser);
         token = creatingUser.checkCreatedOK(response);
-
-        driver.get(Constants.START_URL);
+        OpenPage openPage = new OpenPage(driver);
+        openPage.openSitePage();
         SitePage sitePage = new SitePage(driver);
         sitePage.clickButtonEnter();
         LoginPage loginPage = new LoginPage(driver);

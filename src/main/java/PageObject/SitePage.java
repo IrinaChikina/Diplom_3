@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class SitePage {
-    private final WebDriver driver;
+    private WebDriver driver;
 
     private By enterButten = By.xpath(".//button[contains(@class, 'button_button')]");
     private By personalAccountButtonHeader = By.xpath(".//p[contains(@class, 'AppHeader_header__linkText') and text()='Личный Кабинет']");

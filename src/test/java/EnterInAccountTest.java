@@ -7,11 +7,16 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class EnterInAccountTest extends Base {
-    CreatingUser creatingUser = GeneratorUser.getRandomUser();
-
     String token;
+
+    CreatingUser creatingUser = GeneratorUser.getRandomUser();
+    //OpenPage openPage = new OpenPage(driver);
 
     @Step("Создание пользователя для Stellar Burger")
     @Before
@@ -24,7 +29,8 @@ public class EnterInAccountTest extends Base {
     @Test
     @DisplayName("Проверка авторизации пользователя через кнопку 'Войти в аккаунт' на главной странице сайта")
     public void enterInAccountOnSitePageTest() {
-        driver.get(Constants.START_URL);
+        OpenPage openPage = new OpenPage(driver);
+        openPage.openSitePage();
         SitePage sitePage = new SitePage(driver);
         sitePage.clickButtonEnter();
         LoginPage loginPage = new LoginPage(driver);
@@ -38,7 +44,8 @@ public class EnterInAccountTest extends Base {
     @Test
     @DisplayName("Проверка авторизации пользователя через кнопку 'Личный кабинет' в шапке")
     public void enterInAccountOnPersonalProfileTest() {
-        driver.get(Constants.START_URL);
+        OpenPage openPage = new OpenPage(driver);
+        openPage.openSitePage();
         SitePage sitePage = new SitePage(driver);
         sitePage.jumpPersonalAccount();
         LoginPage loginPage = new LoginPage(driver);
@@ -52,7 +59,8 @@ public class EnterInAccountTest extends Base {
     @Test
     @DisplayName("Проверка авторизации пользователя через страницу регистрции")
     public void enterInAccountOnRegisterPageTest() {
-        driver.get(Constants.REGISTER_URL);
+        OpenPage openPage = new OpenPage(driver);
+        openPage.openRegisterPage();
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.clickEnterButton();
         LoginPage loginPage = new LoginPage(driver);
@@ -67,7 +75,8 @@ public class EnterInAccountTest extends Base {
     @Test
     @DisplayName("Проверка авторизации пользователя через кнопку 'Восстановления пароля'")
     public void enterInAccountByRecoverPasswordTest() {
-        driver.get(Constants.FORGOT_PASSWORD_URL);
+        OpenPage openPage = new OpenPage(driver);
+        openPage.openRecoverPasswordPage();
         RecoverPasswordPage recoverPasswordPage = new RecoverPasswordPage(driver);
         recoverPasswordPage.clickRecoverPassword();
         LoginPage loginPage = new LoginPage(driver);
